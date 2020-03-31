@@ -9,6 +9,7 @@ option(SPELL "Compile with spell checking function" ON) # ON|OFF|enchant|aspell 
 # option(XOSD "Compile with xosd support" OFF) # remove xosd from project completely?
 option(NOTIFICATIONS "Compile with libnotify message support" ON)
 option(PLUGINS "Compile with plugins support" ON)
+option(GSETTINGS_HACK "A workaround for GNOME layout switching problem" OFF)
 
 set(CMAKE_C_STANDARD 99)
 

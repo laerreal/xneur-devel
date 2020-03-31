@@ -250,6 +250,13 @@ if test "x$with_plugins" != "xno"; then
 fi
 
 DEFAULT_CFLAGS="-Wall -Wextra -Werror -g0 -std=gnu99 -fPIC"
+
+AC_ARG_ENABLE([gsetting-hack],
+	AS_HELP_STRING([--enable-gsetting-hack],
+		[A workaround for GNOME layout switching problem]),
+	[DEFAULT_CFLAGS="${DEFAULT_CFLAGS} -DGSETTINGS_HACK=1"]
+)
+
 AC_SUBST(DEFAULT_CFLAGS)
 
 AC_OUTPUT([

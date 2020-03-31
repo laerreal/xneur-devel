@@ -26,3 +26,6 @@ set(ADDITIONAL_LIBS "-lpthread -ldl")
 
 configure_file(../xneur.pc.in xneur.pc @ONLY)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/xneur.pc DESTINATION lib/pkgconfig)
+
+# TODO
+# set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DGSETTINGS_HACK=1")
