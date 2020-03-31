@@ -643,7 +643,7 @@ static void program_change_lang(struct _program *p, int new_lang)
 {
 	log_message(DEBUG, _("Changing language from %s to %s"), xconfig->handle->languages[get_curr_keyboard_group()].name, xconfig->handle->languages[new_lang].name);
 	p->buffer->set_lang_mask(p->buffer, new_lang);
-	set_keyboard_group(new_lang);
+	set_keyboard_group(xconfig->handle->languages[new_lang].group);
 	p->last_layout = new_lang;
 }
 
