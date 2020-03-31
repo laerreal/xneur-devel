@@ -45,15 +45,25 @@ int get_curr_keyboard_group(void)
 	return group;
 }
 
+// TODO: use build system configuration mechanism
+#define GSETTINGS_HACK 1
+
+#if GSETTINGS_HACK
+static char gsettings_command[1024];
+#define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
+#endif
+
 void set_keyboard_group(int layout_group)
 {
 	XkbLockGroup(main_window->display, XkbUseCoreKbd, layout_group);
 
-	//Gsettings hack
-	/*char *gsettings_command = malloc(1024 * sizeof(char));
-	sprintf(gsettings_command, "gsettings set org.gnome.desktop.input-sources current %d", layout_group); 
+#if GSETTINGS_HACK
+	snprintf(gsettings_command, ARRAY_SIZE(gsettings_command),
+			"gsettings set org.gnome.desktop.input-sources current %d",
+			layout_group);
 	log_message (DEBUG, gsettings_command);
-	if (system(gsettings_command)) {};*/
+	if (system(gsettings_command)) {};
+#endif
 }
 
 void set_next_keyboard_group(struct _xneur_handle *handle)
@@ -63,11 +73,13 @@ void set_next_keyboard_group(struct _xneur_handle *handle)
 		new_layout_group = 0;
 	XkbLockGroup(main_window->display, XkbUseCoreKbd, new_layout_group);
 
-	//Gsettings hack
-	/*char *gsettings_command = malloc(1024 * sizeof(char));
-	sprintf(gsettings_command, "gsettings set org.gnome.desktop.input-sources current %d", new_layout_group); 
+#if GSETTINGS_HACK
+	snprintf(gsettings_command, ARRAY_SIZE(gsettings_command),
+			"gsettings set org.gnome.desktop.input-sources current %d",
+			new_layout_group);
 	log_message (DEBUG, gsettings_command);
-	if (system(gsettings_command)) {};*/
+	if (system(gsettings_command)) {};
+#endif
 }
 
 void set_prev_keyboard_group(struct _xneur_handle *handle)
@@ -77,9 +89,11 @@ void set_prev_keyboard_group(struct _xneur_handle *handle)
 		new_layout_group = handle->total_languages - 1;
 	XkbLockGroup(main_window->display, XkbUseCoreKbd, new_layout_group);
 
-	// Gsettings hack
-	/*char *gsettings_command = malloc(1024 * sizeof(char));
-	sprintf(gsettings_command, "gsettings set org.gnome.desktop.input-sources current %d", new_layout_group); 
+#if GSETTINGS_HACK
+	snprintf(gsettings_command, ARRAY_SIZE(gsettings_command),
+			"gsettings set org.gnome.desktop.input-sources current %d",
+			new_layout_group);
 	log_message (DEBUG, gsettings_command);
-	if (system(gsettings_command)) {};*/
+	if (system(gsettings_command)) {};
+#endif
 }
